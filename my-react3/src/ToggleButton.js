@@ -18,11 +18,8 @@ const ToggleButton = () => {
     const [isOn, setIsOn] = useState(false);
 
     const toggle = () => {
-        if (isOn === false) {
-            setIsOn(true);
-        } else {
-            setIsOn(false);
-        }
+        setIsOn(isOn ? false : true);
+    
     }
     // need to add toString() because the state 
     // needs to be converted to a string 

@@ -31,6 +31,7 @@ const NameList = () => {
         if (newName !== ''){
             const newArr = [...names, newName];
             setNames(newArr);
+            // clear the newName useState
             setNewName('');
         }
     }
