@@ -1,29 +1,59 @@
 import React from "react";
-import { useState } from "react";
-
-// Build a todo list component. It should have an input field for adding new tasks,
-// a button to add the task to a list, and a display area to show the list of tasks. 
-// Use useState to manage the list of tasks.
+import { useState, useEffect } from "react";
 
 const ToDoList = () => {
     const [tasks, setTasks] = useState([]);
-    const [inputTasks, setInputTasks] = useState('');
+    const [newTask, setNewTask] = useState('');
 
-    const handleAddTask = () => {
-        if (inputTasks != ""){
-            setTasks([...tasks, inputTasks]);
+    useEffect(() => {
+        const fetchTasks = async () => {
+            try { 
+                const response = await fetch('http://localhost:3000/tasks', {
+                    method: 'GET',
+                });
+                const data = await response.json();
+                setTasks(data);
+                
+            } catch (error) {
+                console.log(error);
+            }
         }
-    }
+        fetchTasks();
+    }, []);
+
+    const handleAddTask = async () => {
+        if (newTask.trim() !== ""){
+            try {
+                const response = await fetch("http://localhost:3000/tasks", {
+                  method: "POST",
+                  headers: {
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({ task: newTask }),
+                });
+                const data = await response.json();
+                setTasks([...tasks, data]);
+                setNewTask("");
+              } catch (error) {
+                console.log(error);
+              }
+            }
+          };
+
     const handleTaskChange = (event) => {
-        setInputTasks(event.target.value);
+        setNewTask(event.target.value);
     };
+    
 
     return (
-        <>
-            <input placeholder="enter a task" value={inputTasks} onChange={handleTaskChange} type="text"></input>
-            <button onClick={handleAddTask}>Add Task</button>
+        <>  
+            <h1>Todo List</h1>
+            <div>
+                <input placeholder="Add a task" value={newTask} onChange={handleTaskChange} type="text"></input>
+                <button onClick={handleAddTask}>Add Task</button>
+            </div>
             <ul>
-                {tasks.map((task, index) => <li key={index}>{task}</li>)}
+                {tasks.map((task) => <li key={task.id}>{task.task}</li>)}
             </ul>
         </>
     )

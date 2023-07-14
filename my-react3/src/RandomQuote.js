@@ -10,7 +10,6 @@ const RandomQuote = () => {
                 const response = await fetch('https://quote-garden.onrender.com/api/v3/quotes');
                 const data = await response.json();
                 const quoteArr = data.data;
-                console.log(quoteArr);
                 setQuote(quoteArr);
             } catch (error) {
                 console.log(error);
