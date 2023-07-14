@@ -2,6 +2,7 @@ import React from "react";
 import ToggleButton from "./ToggleButton";
 import ColorChanger from "./ColorChanger";
 import NameList from "./NameList";
+import RandomQuote from "./RandomQuote";
 
 function App() {
   return (
@@ -9,6 +10,7 @@ function App() {
       <ToggleButton />
       <ColorChanger /><br />
       <NameList />
+      <RandomQuote />
     </>
   );
 }

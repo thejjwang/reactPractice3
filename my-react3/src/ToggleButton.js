@@ -17,10 +17,8 @@ import React from "react";
 const ToggleButton = () => {
     const [isOn, setIsOn] = useState(false);
 
-    const toggle = () => {
-        setIsOn(isOn ? false : true);
+    const toggle = () => setIsOn(isOn ? false : true);
     
-    }
     // need to add toString() because the state 
     // needs to be converted to a string 
     return (

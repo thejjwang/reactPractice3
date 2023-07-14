@@ -20,18 +20,23 @@ import React from "react";
 const initialState = 'red';
 
 const ColorChanger = () => {
-    const [backgroundColor, setbackgroundColor] = useState(initialState);
+    const [backgroundColor, setbackgroundColor] = useState('red');
 
     const changeColor = () => {
+        const colors = ['red', 'green', 'blue'];
+        const random = Math.floor(Math.random()*colors.length);
+        const randomColor = colors[random];
+        console.log(randomColor); 
+        setbackgroundColor(randomColor);
         // math random generates between 0 and 1
         // .toString(16) converts the rounded number to a hexadecimal string representation.
         // The 16 specifies the base of the number system, which is hexadecimal (base-16). 
         // This converts the number to a string that represents a random color in hexadecimal format.
         // to get a random color im multiplying it by the maximum value in the RGB color range (256^3 - 1)
-        const randomColor = Math.floor(Math.random()*16777215).toString(16);
-        const color = "#"+ randomColor;
-        setbackgroundColor(color)
-        console.log(color);   
+        // const randomColor = Math.floor(Math.random()*16777215).toString(16);
+        // const color = "#"+ randomColor;
+        // setbackgroundColor(color)
+        // console.log(color);   
     }
     const resetColor = () => {
         setbackgroundColor(initialState);
