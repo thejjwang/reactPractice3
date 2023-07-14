@@ -3,6 +3,7 @@ import ToggleButton from "./ToggleButton";
 import ColorChanger from "./ColorChanger";
 import NameList from "./NameList";
 import RandomQuote from "./RandomQuote";
+import ToDoList from "./ToDoList";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <ColorChanger /><br />
       <NameList />
       <RandomQuote />
+      <ToDoList />
     </>
   );
 }

@@ -1,29 +1,34 @@
-// Build a component that fetches and displays a random quote from an API. 
-// Use useEffect to fetch the data and update the component's state. 
-// Display the quote on the screen.
-import { useEffect } from "react";
-import { useState } from "react";
 import React from "react";
+import { useState, useEffect } from "react";
 
 const RandomQuote = () => {
-    const [randomQuote, setRandomQuote] = useState('');
+    const [quote, setQuote] = useState([]);
+    
     useEffect(() => {
-        const fetchJokes = async () => {
+        const fetchQuotes = async () => {
             try { 
-                const response = await fetch("https://api.chucknorris.io/jokes/random");
+                const response = await fetch('https://quote-garden.onrender.com/api/v3/quotes');
                 const data = await response.json();
-                const quote = data.value;
-                setRandomQuote(quote);
+                const quoteArr = data.data;
+                console.log(quoteArr);
+                setQuote(quoteArr);
             } catch (error) {
-                console.error(error);
+                console.log(error);
             }
         }
-        fetchJokes();
-        // [] to only render ONCE!
+        fetchQuotes();
     }, []);
-    
-    return <p>The random quote is: {randomQuote}</p>
 
+    return (
+        <ul>
+            {quote.map((quote) => 
+            <li key={quote._id}>{quote.quoteText}</li>)}
+        </ul>
+    )   
 }
 
 export default RandomQuote;
+
+// Build a component that fetches and displays a random quote 
+// from an API. Use useEffect to fetch the data and update the 
+// component's state. Display the quote on the screen.
