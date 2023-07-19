@@ -32,6 +32,7 @@ const ToDoList = () => {
                   body: JSON.stringify({ task: newTask }),
                 });
                 const data = await response.json();
+                console.log(data);
                 setTasks([...tasks, data]);
                 setNewTask("");
               } catch (error) {
@@ -46,16 +47,16 @@ const ToDoList = () => {
     
 
     return (
-        <>  
-            <h1>Todo List</h1>
-            <div>
-                <input placeholder="Add a task" value={newTask} onChange={handleTaskChange} type="text"></input>
-                <button onClick={handleAddTask}>Add Task</button>
+        <div className="app-container">  
+            <h1 className="header">Todo List</h1>
+            <div className="input-container">
+                <input className="input" placeholder="Add a task" value={newTask} onChange={handleTaskChange} type="text"></input>
+                <button className="button" onClick={handleAddTask}>Add Task</button>
             </div>
-            <ul>
-                {tasks.map((task) => <li key={task.id}>{task.task}</li>)}
+            <ul className="list-container">
+                {tasks.map((task) => <li className="li-item" key={task.id}>{task.task}</li>)}
             </ul>
-        </>
+        </div>
     )
 }
 
